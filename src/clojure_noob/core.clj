@@ -217,20 +217,59 @@
 
 ; (inc3 9)
 
+;;; do-things - Section 4 starts from here
+(let [x 3] x)
+;; => 3
+
+(def dalmatian-list
+    ["Pongo" "Perdita" "Puppy 1" "Puppy 2"])
+(let [dalmatians (take 2 dalmatian-list)]
+    dalmatians)
+
+(def x 0)
+(let [x (inc x)] x)
+;; => 1
+
+(loop [iteration 0]
+  (println (str "Iteration " iteration))
+  (if (> iteration 5)
+    (println "Goodbye!")
+    (recur (inc iteration))))
 
 
+(defn recursive-printer
+  ([]
+     (recursive-printer 0))
+  ([iteration]
+     (println (str "Iteration - " iteration))
+     (if (> iteration 3)
+       (println "Goodbye!")
+       (recursive-printer (inc iteration)))))
+(recursive-printer)
 
+;; 4.4 Regular expressions
+(defn has-matching-part?
+  [part]
+  (re-find #"^left-" (:name part)))
 
+(has-matching-part? {:name "left-eye"})
+(has-matching-part? {:name "some-text"})
 
+;; --------------------
+;; string replacement.
+(defn matching-part
+  [part]
+  {:name (clojure.string/replace (:name part) #"^left-" "right-")
+   :size (:size part)})
 
+(matching-part {:name "left-eye" :size 1})
 
+;;; 4.6 - Short symmetrizer with reduce
+;; The pattern of 'process each element and process in a sequence and
+;; build a result' is so common that there is a function for it: reduce
 
+;; sum with reduce
+(reduce + [1 2 3 7])
 
-
-
-
-
-
-
-
-
+;; also `reduce` can take initial value
+(reduce + 5 [2 6 7])
