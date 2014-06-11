@@ -53,7 +53,7 @@
 ;;; --------------------
 ;;; using 'get'
 
-(get {a: 0 :b 1} :b)
+;  (get {a: 0 :b 1} :b)
 
 ;;; using 'vectors'
 (vector "creepy" "full" "moon")
@@ -273,3 +273,160 @@
 
 ;; also `reduce` can take initial value
 (reduce + 5 [2 6 7])
+
+;;; ==================================================
+;;; ----- http://clojure-notes.rubylearning.org/ -----
+;;; ==================================================
+
+;;; Comments
+(comment
+  (load-file "src/clojure-noob/satish-talim.clj")
+  (refer  'inspector)
+  (inspect-tree  {:a  1  :b  2  :c  [1  2  3  {:d  4  :e  5  :f  [6  7  8]}]})
+  (inspect-table  [[1  2  3] [4  5  6] [7  8  9] [10  11  12]])
+  )
+
+
+(println "You are" (/ 979000000 60.0 60 24 365) "years old")
+
+
+;;; empty list
+()
+
+(class ())
+
+;;; Sets
+#{}
+(class #{})
+#{:a :b :c}
+
+(sorted-set "Mandy" "Anita" "Rich")
+(hash-set "Mandy" "Anita" "Rich")       ;are faster than sorted set
+
+(hash-set "Mandy" "Anita" "Mandy" "Rich")       ; duplicates are removed
+
+;;; Maps(dictionaries)
+{}                                      ;empty
+(class {})                              ;same thing
+
+{:ruby "Matz" :clojure "Hickey"}
+
+(def inventors  {:ruby "Matz" :clojure "Hickey"})
+
+(:clojure inventors)                    ;=> Hickey
+
+;;; Usage: (keys map)
+(keys inventors)
+
+;;; Values: (vals map)
+(vals inventors)
+
+;;; Count function
+(count [22 "green" false])
+
+;;; Reverse
+(reverse "sachin")
+(reverse [2 3 4 5 67])
+
+;;; 'apply' function: The apply function returns the result of a given
+;;; function when all the items in a given collection are used as
+;;; arguments.
+
+(apply - [12 9 1])                      ;=> 1
+
+
+;;; map function
+;;; Usage: (map f coll)
+;;; map takes a source collection coll and a function f, and it
+;;; returns a new sequence by invoking f on each element in the coll.
+
+(map * [1 2 8 2] [2 3 0 9])             ; => (2 6 0 18)
+
+
+
+;;; ====================
+
+(first [5 6 7 99]) ;=> 5
+
+(rest [5 6 7 99])  ;=> 6 7 99
+
+(cons 1 [2 3 4])                        ;construct a new sequence
+
+
+(range  10  20  2)
+
+
+;;; cond, condp
+;;; is like 'case'
+(def x 10)
+(cond
+ (< x 0) (println "Negative")
+ (= x 0) (println "Zero!"))
+
+(cond
+ (< x 0) (println "Negative")
+ (= x 0) (println "Zero!")
+ :default (println "Positive"))
+
+;;; ---
+
+(condp = 1
+  1 "Clojure"
+  2 "Ruby"
+  3 "Java"
+  "Sorry, no match")
+
+(condp = 5
+  1 "Clojure"
+  2 "Ruby"
+  3 "Java"
+  "Sorry, no match")
+
+
+;;; when, when-not
+(when true
+  "do-this-first"
+  "then-that"
+  "finally-this"
+  )
+
+(when-not false
+  "do-this-first"
+  "then-that"
+  "finally-this"
+  )
+
+
+;;; functions
+(defn my-function
+  "My custom function"
+  [name]
+  (str "Hello, " name))
+
+(my-function "clojure-noob")
+
+;;; --------------------
+
+(.toUpperCase "hello")
+(.length "tintin")
+
+;;; Example
+(defn parse
+  "Parse helper function."
+  [s]
+  (try (Double/parseDouble (.trim s))
+       (catch NumberFormatException e (prn "Numbers not supported."))))
+
+(parse "3")
+
+;;; --------------------
+
+(use 'clojure.inspector)
+
+(inspect (System/getProperties))
+
+
+
+
+
+
