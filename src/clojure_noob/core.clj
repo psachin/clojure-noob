@@ -1,4 +1,6 @@
 (ns clojure-noob.core
+  (:use [clojure.math.numeric-tower :only (gcd, sqrt)])
+  (:import (java.text NumberFormat) (javax.swing JFrame JLabel))
   (:gen-class))
 
 (defn -main
@@ -423,9 +425,21 @@
 
 (use 'clojure.inspector)
 
-(inspect (System/getProperties))
+;; (inspect (System/getProperties))
 
+(println (gcd 27 81))
+(println (sqrt 7))
+(println (.format (NumberFormat/getInstance) Math/PI))
 
+;; ====================
+
+; the code below requires you to have knowledge of the Java programming language
+; also see the generated image below
+(doto (JFrame. "Hello")
+  (.add (JLabel. "Hello, World!"))
+  (.pack)
+  (.setDefaultCloseOperation JFrame/EXIT_ON_CLOSE)
+  (.setVisible true))
 
 
 
